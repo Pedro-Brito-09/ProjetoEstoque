@@ -5,5 +5,5 @@ class Engradado:
         self.produto = produto
         self.quantidade = quantidade
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Engradado de {self.produto.nome} ({self.quantidade} unidades)"

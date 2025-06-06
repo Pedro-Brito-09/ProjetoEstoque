@@ -14,5 +14,5 @@ class Produto:
         self.fabricante = fabricante
         self.categoria = categoria
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.nome} (Cód: {self.codigo}, Lote: {self.lote}, Val: {self.dataValidade})"
