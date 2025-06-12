@@ -45,7 +45,7 @@ class Estoque:
                 
         return None
     
-    def visualizar_estoque(self):
+    def visualizarEstoque(self):
         for linha in range(8):
             for coluna in range(5):
                 pilha = self.matriz[linha][coluna]

@@ -1,19 +1,19 @@
 from datetime import datetime
 
 class ItemPedido:
-    def __init__(self, codigo_produto: str, quantidade: int):
-        self.codigo_produto = codigo_produto
+    def __init__(self, codigoProduto: str, quantidade: int):
+        self.codigoProduto = codigoProduto
         self.quantidade = quantidade
 
 class Pedido:
     def __init__(self, solicitante: str):
         self.solicitante = solicitante
-        self.data_solicitacao = datetime.now()
+        self.dataSolicitacao = datetime.now()
         self.itens = []
         self.atendido = False
     
-    def adicionar_item(self, codigo_produto: str, quantidade: int):
-        self.itens.append(ItemPedido(codigo_produto, quantidade))
+    def adicionarItem(self, codigoProduto: str, quantidade: int):
+        self.itens.append(ItemPedido(codigoProduto, quantidade))
     
     def __str__(self) -> str:
-        return f"Pedido de {self.solicitante} em {self.data_solicitacao} ({len(self.itens)} itens)"
+        return f"Pedido de {self.solicitante} em {self.dataSolicitacao} ({len(self.itens)} itens)"
