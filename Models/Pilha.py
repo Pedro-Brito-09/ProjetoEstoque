@@ -30,5 +30,26 @@ class Pilha:
     def isCheia(self) -> bool:
         return len(self.engradados) == self.capacidadeMaxima
     
+    def dicionario(self):
+        engradados = []
+        for e in self.engradados:
+            engradados.append(e.dicionario())
+
+        return {
+            'engradados': engradados,
+            'capacidadeMaxima': self.capacidadeMaxima
+        }
+    
     def __str__(self) -> str:
-        return f"Pilha com {len(self.engradados)} engradados (Capacidade: {self.capacidade_maxima})"
+        return f"Pilha com {len(self.engradados)} engradados (Capacidade: {self.capacidadeMaxima})"
+    
+    @classmethod
+    def fromDicionario(_, data):
+        engradados = []
+        for e in data["engradados"]:
+            engradados.append(Engradado.fromDicionario(e))
+
+        pilha = Pilha()
+        pilha.engradados = engradados
+        pilha.capacidadeMaxima = data["capacidadeMaxima"]
+        return pilha

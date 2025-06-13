@@ -5,5 +5,16 @@ class Engradado:
         self.produto = produto
         self.quantidade = quantidade
     
+    def dicionario(self):
+        return {
+            'produto': self.produto.dicionario(),
+            'quantidade': self.quantidade
+        }
+
     def __str__(self) -> str:
         return f"Engradado de {self.produto.nome} ({self.quantidade} unidades)"
+    
+    @classmethod
+    def fromDicionario(_, data):
+        produto = Produto(**data['produto'])
+        return Engradado(produto, data['quantidade'])

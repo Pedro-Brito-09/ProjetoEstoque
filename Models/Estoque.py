@@ -6,16 +6,19 @@ class Estoque:
     def __init__(self):
         self.matriz = []
 
-        for i in range(5):
-            for j in range(8):
-                self.matriz.append(Pilha())
+        for i in range(8):
+            linha = []
+            for j in range(5):
+                linha.append(Pilha())
+            
+            self.matriz.append(linha)
     
     def acharPilhaParaColocarProduto(self, produto: Produto) -> tuple[int, int] | None:
         for linha in range(8):
             for coluna in range(5):
                 pilha = self.matriz[linha][coluna]
                 topo = pilha.topo()
-                if topo and topo.produto.codigo == produto.codigo and not pilha.isCheia():
+                if topo and topo.produto.codigoProduto == produto.codigoProduto and not pilha.isCheia():
                     return (linha, coluna)
         
         for linha in range(8):
@@ -40,7 +43,7 @@ class Estoque:
                 pilha = self.matriz[linha][coluna]
                 topo = pilha.topo()
 
-                if topo and topo.produto.codigo == codigoProduto:
+                if topo and topo.produto.codigoProduto == codigoProduto:
                     return pilha.removerEngradado()
                 
         return None
@@ -53,3 +56,25 @@ class Estoque:
 
                 if not pilha.isVazia():
                     print(f"  Topo: {pilha.topo()}")
+
+    def dicionario(self):
+        matriz = []
+        for l in self.matriz:
+            linha = []
+            for p in l:
+                linha.append(p.dicionario())
+            
+            matriz.append(linha)
+            
+        return {
+            'matriz': matriz
+        }
+
+    @classmethod
+    def fromDicionario(_, data):
+        estoque = Estoque()
+        for i, linha in enumerate(data["matriz"]):
+            for j, pilha in enumerate(linha):
+                estoque.matriz[i][j] = Pilha.fromDicionario(pilha)
+        
+        return estoque
